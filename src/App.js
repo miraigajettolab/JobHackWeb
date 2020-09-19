@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import connect from '@vkontakte/vkui-connect';
+import './App.css';
 import { View, ModalRoot, ModalPage, ModalPageHeader, PanelHeaderButton, FormLayout, Textarea, Button, Input, platform,  ANDROID, IOS} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
-import Icon24Done from '@vkontakte/icons/dist/24/done';
 import Home from './panels/Home';
 import PrimaryForm from './panels/PrimaryForm'
 import Kiara from './panels/Kiara';
@@ -24,7 +24,8 @@ class App extends React.Component {
 			company: "",
 			description: "",
 			startMonth: "",
-			finishMonth: ""
+			finishMonth: "",
+			modifyId: -1
 		};
 
 		this.changeHandler = this.changeHandler.bind(this)
@@ -49,7 +50,7 @@ class App extends React.Component {
             "company": obj.company,
             "description": obj.description,
             "startMonth": obj.startMonth,
-            "finishMonth": obj.finishMonth
+			"finishMonth": obj.finishMonth
         }]
 		
 		this.setState({
@@ -73,7 +74,62 @@ class App extends React.Component {
 		this.setState({
 			expArray
 		});
-    }
+	}
+	
+	modifyExp = id => {
+		this.state.expArray.map(item => {
+			if (item.id === id){
+				this.setState({
+				modifyId: item.id,
+				position: item.position,
+				company: item.company,
+				description: item.description,
+				startMonth: item.startMonth,
+				finishMonth: item.finishMonth
+				})
+			}
+		});
+
+		this.setActiveModal(MODAL_PAGE_FILTERS)
+	}
+	
+	commitModifyExp = id => {
+		console.log("!!!!!!!!")
+		let expArray = [this.state.expArray.length]
+		let currentItem
+
+		for(let i = 0; i < this.state.expArray.length; i++){
+			currentItem = this.state.expArray[i];
+			if(currentItem.id == id){
+				expArray[i] = {
+					"id":id,
+					"position":this.state.position,
+					"company":this.state.company,
+					"description":this.state.description,
+					"startMonth":this.state.startMonth,
+					"finishMonth":this.state.finishMonth
+				}
+			}
+			else {
+				expArray[i] = this.state.expArray[i];
+			}
+		}
+
+		this.setState({
+			expArray
+		});
+
+		this.setState({
+			modifyId:-1,
+			position: "",
+			company: "",
+			description: "",
+			startMonth: "",
+			finishMonth: ""
+		});
+
+		this.modalBack()
+	}
 
 	setActiveModal(activeModal) {
 		activeModal = activeModal || null;
@@ -110,11 +166,6 @@ class App extends React.Component {
 		this.setState({ activePanel: e.currentTarget.dataset.to })
 	};
 
-	greeting() {
-		console.log('hello!');
-		console.log("hahah")
-	}
-
 	render() {
 
 		const modal = (
@@ -128,13 +179,13 @@ class App extends React.Component {
 				header={
 				  <ModalPageHeader
 					left={osname === ANDROID && <PanelHeaderButton onClick={this.modalBack}><Icon24Cancel /></PanelHeaderButton>}
-					right={<PanelHeaderButton onClick={this.modalBack}>{osname === IOS ? 'Отмена' : <Icon24Done />}</PanelHeaderButton>}
+					right={<PanelHeaderButton onClick={this.modalBack}>{'Отмена'}</PanelHeaderButton>}
 				  >
 					Добавить опыт
 				  </ModalPageHeader>
 				}
 			  >
-         <FormLayout>
+         <FormLayout className="ModalForm">
 			<Input 
 				top="Название позиции в организации" 
 				onChange = {this.changeHandler}
@@ -165,16 +216,15 @@ class App extends React.Component {
 				onChange = {this.changeHandler}
 				name = "finishMonth"
 				value = {this.state.finishMonth}/>
-				<Button size="xl" onClick={e => {this.addExp(
+				<Button size="xl" onClick={e => {this.state.modifyId === -1 ? this.addExp(
 					{
 						"position": this.state.position,
 						"company": this.state.company,
 						"description": this.state.description,
 						"startMonth": this.state.startMonth,
 						"finishMonth": this.state.finishMonth	
-					}
-				
-				)}}
+					}):this.commitModifyExp(this.state.modifyId)
+				}}
 				disabled={!(
 					this.state.position.length > 0 &&
 					this.state.company.length > 0 &&
@@ -191,7 +241,7 @@ class App extends React.Component {
 		return (
 			<View activePanel={this.state.activePanel} modal={modal}>
 				<Home id="home" go={this.go} />
-				<PrimaryForm id="primaryForm" go={this.go} modal={() => this.setActiveModal(MODAL_PAGE_FILTERS)} expArray={this.state.expArray} removeExp={this.removeExp}/>
+				<PrimaryForm id="primaryForm" go={this.go} modal={() => this.setActiveModal(MODAL_PAGE_FILTERS)} expArray={this.state.expArray} removeExp={this.removeExp} modifyExp={this.modifyExp}/>
 				<Kiara id="kiara" go={this.go} />
 			</View>
 		);

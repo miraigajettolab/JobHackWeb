@@ -32,7 +32,7 @@ function PrimaryForm(props){
                 caption={item.startMonth + "   " + item.finishMonth}
                 after= {<div className="cardButtons">
                     <Icon28CancelOutline className="Icon28Cancel" onClick = {() => {props.removeExp(item.id)}}/>
-                    <Icon28EditOutline className="Icon28Edit"/>
+                    <Icon28EditOutline className="Icon28Edit" onClick = {() => {props.modifyExp(item.id)}}/>
                 </div>}
                 bottom={item.description}
             >
@@ -52,7 +52,8 @@ PrimaryForm.propTypes = {
     go: PropTypes.func.isRequired,
     modal: PropTypes.func.isRequired,
     expArray: PropTypes.array.isRequired,
-    removeExp: PropTypes.func.isRequired
+    removeExp: PropTypes.func.isRequired,
+    modifyExp: PropTypes.func.isRequired
 };
 
 export default PrimaryForm;
