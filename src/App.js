@@ -6,6 +6,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Home from './panels/Home';
 import PrimaryForm from './panels/PrimaryForm'
+import Questions from './panels/Questions'
 import Kiara from './panels/Kiara';
 
 const MODAL_PAGE_FILTERS = 'filters';
@@ -15,7 +16,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			activePanel: 'primaryForm',
+			activePanel: 'home',
 			fetchedUser: null,
 			activeModal: null,
 			modalHistory: [],
@@ -170,11 +171,14 @@ class App extends React.Component {
 
 		const modal = (
 			 <ModalRoot
+			 className="ModalForm"
 			  activeModal={this.state.activeModal}
 			  onClose={this.modalBack}
 			>
 			  <ModalPage
 				id={MODAL_PAGE_FILTERS}
+				settlingHeight={100}
+				dynamicContentHeight={true}
 				onClose={this.modalBack}
 				header={
 				  <ModalPageHeader
@@ -185,32 +189,38 @@ class App extends React.Component {
 				  </ModalPageHeader>
 				}
 			  >
-         <FormLayout className="ModalForm">
+         <FormLayout>
 			<Input 
+				className = "inputElement"
 				top="Название позиции в организации" 
 				onChange = {this.changeHandler}
 				name = "position"
 				value = {this.state.position}
 				placeholder="Например официант" />
+				
 			<Input 
+				className = "inputElement"
 				top={"Название организации"}
 				onChange = {this.changeHandler}
 				name = "company"
 				value = {this.state.company}
 				placeholder={"Я работал в  . . ."} />
-			<Textarea 
+			<Textarea
+				className = "inputElement" 
 				top="Описание работы" 
 				onChange = {this.changeHandler}
 				name = "description"
 				value = {this.state.description}
 				placeholder="В мои обязанности входило  . . ."/>
 			<Input 
+				className = "inputElement"
 				top={"Начало работы"}
 				type="month"
 				onChange = {this.changeHandler}
 				name = "startMonth"
 				value = {this.state.startMonth} />
 			<Input 
+				className = "inputElement"
 				top={"Конец работы"}
 				type="month"
 				onChange = {this.changeHandler}
@@ -232,7 +242,7 @@ class App extends React.Component {
 					this.state.startMonth.length > 0 &&
 					this.state.finishMonth.length > 0
 				)}
-				>Добавить</Button>
+				>Сохранить</Button>
 		</FormLayout>
 			  </ModalPage>
 			</ModalRoot>
@@ -242,6 +252,7 @@ class App extends React.Component {
 			<View activePanel={this.state.activePanel} modal={modal}>
 				<Home id="home" go={this.go} />
 				<PrimaryForm id="primaryForm" go={this.go} modal={() => this.setActiveModal(MODAL_PAGE_FILTERS)} expArray={this.state.expArray} removeExp={this.removeExp} modifyExp={this.modifyExp}/>
+				<Questions id="questions" go={this.go}/>
 				<Kiara id="kiara" go={this.go} />
 			</View>
 		);

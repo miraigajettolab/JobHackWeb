@@ -9,17 +9,18 @@ import Icon28CancelOutline from '@vkontakte/icons/dist/28/cancel_outline';
 const osname = platform();
 
 function PrimaryForm(props){
+    console.log(props.expArray)
     return <Panel id={props.id}>
 		<PanelHeader
-            separator={false}
-			left={<PanelHeaderButton onClick={props.go} data-to="fundraiserType">
+            separator={true}
+			left={<PanelHeaderButton onClick={props.go} data-to="home">
 				{osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
 			</PanelHeaderButton>}
 		>
 		Опыт
 		</PanelHeader>
 
-        <Group separator="hide" header={<Header mode="secondary">Опыт</Header>}>
+        <Group>
         <CardGrid>
 
         {
@@ -34,14 +35,17 @@ function PrimaryForm(props){
                     <Icon28CancelOutline className="Icon28Cancel" onClick = {() => {props.removeExp(item.id)}}/>
                     <Icon28EditOutline className="Icon28Edit" onClick = {() => {props.modifyExp(item.id)}}/>
                 </div>}
-                bottom={item.description}
-            >
+                bottom={<div className="companyText">{item.description}</div>}            >
             <div className="companyText">{item.position}</div>
             </RichCell>
         </Card>))
         }
         </CardGrid>
         <Button className="modalButton" size="xl" onClick={props.modal}>Добавить</Button>
+        <Button className="modalButton" size="xl" onClick={props.go} data-to="questions" 
+            disabled={!(props.expArray.length > 0 )}>Отправить</Button>
+        <Button className="modalButton" size="xl" onClick={props.go} data-to="questions" 
+            style={props.expArray.length > 0 ? {display: "none"}:{}} mode = "secondary">У меня нет опыта</Button>
         </Group>
 
 	</Panel>

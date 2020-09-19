@@ -1,5 +1,9 @@
 .ModalForm {
-    overflow-y: auto;
-    height: 600px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     margin-bottom: 24px;
+    height: 100%;
+}
+.inputElement {
+    margin-bottom: 18px;
 }
