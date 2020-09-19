@@ -5,18 +5,22 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env PORT=10888 react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "deploy": "npm run build && surge --project ./build —domain job-hack-app.surge.sh"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "cross-env": "^5.2.0",
+    "git-scripts": "^0.4.3",
     "react-hot-loader": "^4.7.1",
-    "react-scripts": "^2.1.5"
+    "react-scripts": "^2.1.5",
+    "surge": "^0.21.6"
   },
   "dependencies": {
     "@vkontakte/icons": "^1.41.0",
+    "@vkontakte/vk-bridge": "^2.2.8",
     "@vkontakte/vkui": "^3.12.6",
     "@vkontakte/vkui-connect": "^1.5.4",
     "babel-eslint": "^9.0.0",
@@ -24,5 +28,11 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
