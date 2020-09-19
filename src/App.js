@@ -4,6 +4,7 @@ import { View } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './panels/Home';
+import PrimaryForm from './panels/PrimaryForm'
 import Kiara from './panels/Kiara';
 
 class App extends React.Component {
@@ -11,7 +12,7 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			activePanel: 'home',
+			activePanel: 'primaryForm',
 			fetchedUser: null,
 		};
 	}
@@ -36,7 +37,8 @@ class App extends React.Component {
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<Home id="home" fetchedUser={this.state.fetchedUser} go={this.go} />
+				<Home id="home" go={this.go} />
+				<PrimaryForm id="primaryForm" go={this.go} />
 				<Kiara id="kiara" go={this.go} />
 			</View>
 		);

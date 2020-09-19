@@ -1,0 +1,23 @@
+.Icon28Cancel {
+    margin-top: 0px;
+
+}
+
+.Icon28Edit {
+    margin-top: 30px;
+}
+
+.cardButtons {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    
+    position: absolute;
+    right: 0px;
+    flex: none;
+    order: 0;
+}
+
+.companyText {
+    margin-right: 30px;
+}

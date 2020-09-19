@@ -46,7 +46,7 @@ function Home (props){
                 header="Создать резюме"
               	subheader="Рассказать об опыте и ответить на вопросы"
                 asideMode="expand"
-                onClick={props.go} data-to="kiara"
+                onClick={props.go} data-to="primaryForm"
             />
         </Div>
 	</Panel>
