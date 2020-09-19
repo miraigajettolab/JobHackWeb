@@ -21,3 +21,11 @@
 .companyText {
     margin-right: 30px;
 }
+
+.modalButton {
+    width: calc(100% - 24px);
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
