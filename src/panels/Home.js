@@ -1,21 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Panel, PanelHeader, PanelHeaderButton, platform, IOS, Div, Banner, File} from '@vkontakte/vkui';
+import {Panel, PanelHeader, Div, Banner, File} from '@vkontakte/vkui';
 import './Home.css';
-import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
-import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon28ListAddOutline from '@vkontakte/icons/dist/28/list_add_outline';
 import Icon28DocumentOutline from '@vkontakte/icons/dist/28/document_outline';
 import {readString} from 'react-papaparse'
-const osname = platform();
+
 
 function Home (props){
 	return <Panel id={props.id}>
-		<PanelHeader
-			left={<PanelHeaderButton onClick={props.go} data-to="home">
-				{osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
-			</PanelHeaderButton>}
-		>
+		<PanelHeader>
 			Поиск вакансий
 		</PanelHeader>
 		<Div className="TextGroup">

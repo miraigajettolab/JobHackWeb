@@ -7,7 +7,7 @@ import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Home from './panels/Home';
 import PrimaryForm from './panels/PrimaryForm'
 import Questions from './panels/Questions'
-import Kiara from './panels/Kiara';
+import Done from './panels/Done'
 
 const MODAL_PAGE_FILTERS = 'filters';
 const osname = platform();
@@ -310,7 +310,7 @@ class App extends React.Component {
 				<Home id="home" go={this.go} load={this.loadCsv} popout={this.popout}/>
 				<PrimaryForm id="primaryForm" go={this.go} modal={() => this.setActiveModal(MODAL_PAGE_FILTERS)} expArray={this.state.expArray} removeExp={this.removeExp} modifyExp={this.modifyExp} postIt={this.PostIt}/>
 				<Questions id="questions" go={this.go} changeHandler={this.changeHandlerQuestions} questions={this.state.questions} popout={this.popout}/>
-				<Kiara id="kiara" go={this.go} />
+				<Done id="done" go={this.go} />
 			</View>
 		);
 	}

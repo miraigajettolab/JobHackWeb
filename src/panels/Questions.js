@@ -29,7 +29,7 @@ function Questions(props){
             key = {i}
             value = {item[1]} />))
         }
-        <Button className="applyButton" size="xl" onClick={console.log}>Отправить</Button>
+        <Button className="applyButton" size="xl" onClick={props.go} data-to="done">Отправить</Button>
         </FormLayout>
         </Group>
 
