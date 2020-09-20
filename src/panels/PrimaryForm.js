@@ -27,6 +27,17 @@ function PrimaryForm(props){
         <Group>
         <CardGrid style={{marginBottom: noExp ? "190px" : "130px"}}>
         {
+        props.expArray.length > 0 ? <div></div> :<Card size="l">
+            <RichCell
+                className="emptyCell"
+                disabled
+                multiline
+            >
+            <div className="placeholderText">Пока здесь ничего нет</div>
+        </RichCell>
+        </Card>
+        }
+        {
         props.expArray.map((item, i) => (
         <Card size="l" key={i}>
             <RichCell
