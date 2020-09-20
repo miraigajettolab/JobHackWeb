@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Panel, PanelHeader, PanelHeaderButton, platform, IOS, FormLayout, Input, Button, Group} from '@vkontakte/vkui';
+import {Panel, PanelHeader, PanelHeaderButton, platform, IOS, FormLayout, Input, Button, Group,} from '@vkontakte/vkui';
 import './Questions.css';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 const osname = platform();
 
 function Questions(props){
+    props.popout(props.questions.length > 0 ? false : true)
     return <Panel id={props.id}>
 		<PanelHeader
             separator={true}
@@ -39,7 +40,8 @@ Questions.propTypes = {
 	id: PropTypes.string.isRequired,
     go: PropTypes.func.isRequired,
     questions: PropTypes.array.isRequired,
-    changeHandler: PropTypes.func.isRequired
+    changeHandler: PropTypes.func.isRequired,
+    popout: PropTypes.func.isRequired
 };
 
 export default Questions;

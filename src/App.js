@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from '@vkontakte/vkui-connect';
 import './App.css';
-import { View, ModalRoot, ModalPage, ModalPageHeader, PanelHeaderButton, FormLayout, Textarea, Button, Input, platform,  ANDROID} from '@vkontakte/vkui';
+import { View, ModalRoot, ModalPage, ModalPageHeader, PanelHeaderButton, FormLayout, Textarea, Button, Input, platform,  ANDROID, ScreenSpinner} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Home from './panels/Home';
@@ -16,6 +16,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			popout: null,
 			activePanel: 'home',
 			fetchedUser: null,
 			activeModal: null,
@@ -34,6 +35,7 @@ class App extends React.Component {
 		this.changeHandlerQuestions = this.changeHandlerQuestions.bind(this)
 		this.PostIt = this.PostIt.bind(this)
 		this.loadCsv = this.loadCsv.bind(this)
+		this.popout = this.popout.bind(this)
 		this.modalBack = () => {
 			this.setActiveModal(this.state.modalHistory[this.state.modalHistory.length - 2]);
 		  };
@@ -208,6 +210,19 @@ class App extends React.Component {
 		this.setState({ activePanel: e.currentTarget.dataset.to })
 	};
 
+	popout (turnOn) {
+		if(turnOn){
+			if(this.state.popout === null){
+				this.setState({ popout: <ScreenSpinner /> });
+			}
+		}
+		else{
+			if(this.state.popout !== null){
+				this.setState({ popout: null });
+			}
+		}
+	  }
+
 	render() {
 
 		const modal = (
@@ -281,7 +296,8 @@ class App extends React.Component {
 					this.state.company.length > 0 &&
 					this.state.description.length > 0 &&
 					this.state.startMonth.length > 0 &&
-					this.state.finishMonth.length > 0
+					this.state.finishMonth.length > 0 &&
+					this.state.startMonth <= this.state.finishMonth
 				)}
 				>Сохранить</Button>
 		</FormLayout>
@@ -290,10 +306,10 @@ class App extends React.Component {
 		);
 
 		return (
-			<View activePanel={this.state.activePanel} modal={modal}>
-				<Home id="home" go={this.go} load={this.loadCsv}/>
+			<View popout={this.state.popout} activePanel={this.state.activePanel} modal={modal}>
+				<Home id="home" go={this.go} load={this.loadCsv} popout={this.popout}/>
 				<PrimaryForm id="primaryForm" go={this.go} modal={() => this.setActiveModal(MODAL_PAGE_FILTERS)} expArray={this.state.expArray} removeExp={this.removeExp} modifyExp={this.modifyExp} postIt={this.PostIt}/>
-				<Questions id="questions" go={this.go} changeHandler={this.changeHandlerQuestions} questions={this.state.questions}/>
+				<Questions id="questions" go={this.go} changeHandler={this.changeHandlerQuestions} questions={this.state.questions} popout={this.popout}/>
 				<Kiara id="kiara" go={this.go} />
 			</View>
 		);

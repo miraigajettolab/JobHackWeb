@@ -32,8 +32,12 @@ function Home (props){
                 onChange={e => {
                     const file = e.target.files[0]
                     const reader = new FileReader();
-                    reader.readAsText(file);
+					reader.readAsText(file);
+					reader.onloadstart = () => {
+						props.popout(true)
+					};
                     reader.onloadend = () => {
+						props.popout(false)
                         props.load(readString(reader.result))
                     };
                     }}
@@ -54,7 +58,8 @@ function Home (props){
 Home.propTypes = {
 	id: PropTypes.string.isRequired,
 	go: PropTypes.func.isRequired,
-	load: PropTypes.func.isRequired
+	load: PropTypes.func.isRequired,
+	popout: PropTypes.func.isRequired
 };
 
 export default Home;
