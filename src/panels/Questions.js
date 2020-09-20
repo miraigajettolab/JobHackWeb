@@ -7,7 +7,6 @@ import Icon24Back from '@vkontakte/icons/dist/24/back';
 const osname = platform();
 
 function Questions(props){
-    console.log(props.expArray)
     return <Panel id={props.id}>
 		<PanelHeader
             separator={true}
@@ -17,13 +16,29 @@ function Questions(props){
 		>
 		Вопросы
 		</PanelHeader>
+        <Group>
+        <FormLayout>
+        {
+        props.questions.map((item,i) => (
+            <Input 
+            className = "inputElement"
+            top={item[0]}
+            onChange = {props.changeHandler}
+            name = {i}
+            value = {item[1]} />))
+        }
+        <Button className="applyButton" size="xl" onClick={console.log}>Отправить</Button>
+        </FormLayout>
+        </Group>
 
 	</Panel>
 };
 
 Questions.propTypes = {
 	id: PropTypes.string.isRequired,
-    go: PropTypes.func.isRequired
+    go: PropTypes.func.isRequired,
+    questions: PropTypes.array.isRequired,
+    changeHandler: PropTypes.func.isRequired
 };
 
 export default Questions;

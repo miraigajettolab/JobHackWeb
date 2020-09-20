@@ -27,10 +27,11 @@ class App extends React.Component {
 			startMonth: "",
 			finishMonth: "",
 			modifyId: -1,
-			questions: {}
+			questions: []
 		};
 
 		this.changeHandler = this.changeHandler.bind(this)
+		this.changeHandlerQuestions = this.changeHandlerQuestions.bind(this)
 		this.PostIt = this.PostIt.bind(this)
 		this.loadCsv = this.loadCsv.bind(this)
 		this.modalBack = () => {
@@ -46,12 +47,11 @@ class App extends React.Component {
 				  'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({"data" : this.state.expArray})
-			  }).then(response => response.json()).then(data => this.setState({"questions":data}))
+			  }).then(response => response.json()).then(data => this.setState({"questions":data.data}))
 
 			this.setState({
 				activePanel: 'questions'
 			});
-			console.log(this.state.questions)
 	}
 	
 	loadCsv(csv){
@@ -75,6 +75,14 @@ class App extends React.Component {
 		const type = event.target.type
 		const checked = event.target.checked
 		type === "checkbox" ? this.setState({[name]:checked}) : this.setState({[name]:value})
+	}
+
+	changeHandlerQuestions(event) {
+		const name = event.target.name
+		const value = event.target.value
+		let questionsOld = this.state.questions
+		questionsOld[name][1] = value;
+		this.setState({questionsOld})
 	}
 
 	addExp = (obj) => {
@@ -286,7 +294,7 @@ class App extends React.Component {
 			<View activePanel={this.state.activePanel} modal={modal}>
 				<Home id="home" go={this.go} load={this.loadCsv}/>
 				<PrimaryForm id="primaryForm" go={this.go} modal={() => this.setActiveModal(MODAL_PAGE_FILTERS)} expArray={this.state.expArray} removeExp={this.removeExp} modifyExp={this.modifyExp} postIt={this.PostIt}/>
-				<Questions id="questions" go={this.go}/>
+				<Questions id="questions" go={this.go} changeHandler={this.changeHandlerQuestions} questions={this.state.questions}/>
 				<Kiara id="kiara" go={this.go} />
 			</View>
 		);
