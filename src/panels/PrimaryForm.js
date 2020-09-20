@@ -8,7 +8,10 @@ import Icon28EditOutline from '@vkontakte/icons/dist/28/edit_outline';
 import Icon28CancelOutline from '@vkontakte/icons/dist/28/cancel_outline';
 const osname = platform();
 
+
+
 function PrimaryForm(props){
+
     console.log(props.expArray)
     return <Panel id={props.id}>
 		<PanelHeader
@@ -22,7 +25,6 @@ function PrimaryForm(props){
 
         <Group>
         <CardGrid>
-
         {
         props.expArray.map((item) => (
         <Card size="l">
@@ -42,7 +44,7 @@ function PrimaryForm(props){
         }
         </CardGrid>
         <Button className="modalButton" size="xl" onClick={props.modal}>Добавить</Button>
-        <Button className="modalButton" size="xl" onClick={props.go} data-to="questions" 
+        <Button className="modalButton" size="xl" onClick={props.postIt}
             disabled={!(props.expArray.length > 0 )}>Отправить</Button>
         <Button className="modalButton" size="xl" onClick={props.go} data-to="questions" 
             style={props.expArray.length > 0 ? {display: "none"}:{}} mode = "secondary">У меня нет опыта</Button>
@@ -57,7 +59,8 @@ PrimaryForm.propTypes = {
     modal: PropTypes.func.isRequired,
     expArray: PropTypes.array.isRequired,
     removeExp: PropTypes.func.isRequired,
-    modifyExp: PropTypes.func.isRequired
+    modifyExp: PropTypes.func.isRequired,
+    postIt: PropTypes.func.isRequired
 };
 
 export default PrimaryForm;

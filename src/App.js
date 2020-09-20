@@ -30,10 +30,26 @@ class App extends React.Component {
 		};
 
 		this.changeHandler = this.changeHandler.bind(this)
+		this.PostIt = this.PostIt.bind(this)
 		this.modalBack = () => {
 			this.setActiveModal(this.state.modalHistory[this.state.modalHistory.length - 2]);
 		  };
 	}
+
+	PostIt() {
+			  fetch('https://desolate-cliffs-57137.herokuapp.com/proceed_data', {
+				method: 'POST',
+				headers: {
+				  'Accept': 'application/json',
+				  'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({"data" : this.state.expArray})
+			  }).then(response => response.json()).then(data => console.log(data))
+
+			this.setState({
+				//activePanel: 'home'
+			});
+    }
 
 	changeHandler(event) {
 		const name = event.target.name
@@ -251,7 +267,7 @@ class App extends React.Component {
 		return (
 			<View activePanel={this.state.activePanel} modal={modal}>
 				<Home id="home" go={this.go} />
-				<PrimaryForm id="primaryForm" go={this.go} modal={() => this.setActiveModal(MODAL_PAGE_FILTERS)} expArray={this.state.expArray} removeExp={this.removeExp} modifyExp={this.modifyExp}/>
+				<PrimaryForm id="primaryForm" go={this.go} modal={() => this.setActiveModal(MODAL_PAGE_FILTERS)} expArray={this.state.expArray} removeExp={this.removeExp} modifyExp={this.modifyExp} postIt={this.PostIt}/>
 				<Questions id="questions" go={this.go}/>
 				<Kiara id="kiara" go={this.go} />
 			</View>

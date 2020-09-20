@@ -27,7 +27,8 @@
     "core-js": "^2.6.5",
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react-dom": "^16.8.3",
+    "react-papaparse": "^3.8.0"
   },
   "browserslist": [
     ">0.2%",

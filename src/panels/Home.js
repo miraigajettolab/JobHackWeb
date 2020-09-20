@@ -6,11 +6,10 @@ import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon28ListAddOutline from '@vkontakte/icons/dist/28/list_add_outline';
 import Icon28DocumentOutline from '@vkontakte/icons/dist/28/document_outline';
+import {readString} from 'react-papaparse'
 const osname = platform();
 
 function Home (props){
-	const [doc, setDoc] = useState(null);
-	
 	return <Panel id={props.id}>
 		<PanelHeader
 			left={<PanelHeaderButton onClick={props.go} data-to="home">
@@ -28,14 +27,14 @@ function Home (props){
                         className="Icon28DocumentOutline"
                     />} 
                 controlSize="xl" 
-                mode="outline"
+				mode="outline"
+				accept=".csv"
                 onChange={e => {
                     const file = e.target.files[0]
-                    //Type check if(file.type.substring(0,5)==="image")
                     const reader = new FileReader();
-                    reader.readAsDataURL(file);
+                    reader.readAsText(file);
                     reader.onloadend = () => {
-                        setDoc(reader.result)
+                        props.load(readString(reader.result))
                     };
                     }}
                 >
@@ -55,6 +54,7 @@ function Home (props){
 Home.propTypes = {
 	id: PropTypes.string.isRequired,
 	go: PropTypes.func.isRequired,
+	load: PropTypes.func.isRequired
 };
 
 export default Home;
