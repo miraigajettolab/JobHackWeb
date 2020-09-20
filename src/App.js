@@ -31,6 +31,7 @@ class App extends React.Component {
 
 		this.changeHandler = this.changeHandler.bind(this)
 		this.PostIt = this.PostIt.bind(this)
+		this.loadCsv = this.loadCsv.bind(this)
 		this.modalBack = () => {
 			this.setActiveModal(this.state.modalHistory[this.state.modalHistory.length - 2]);
 		  };
@@ -47,9 +48,24 @@ class App extends React.Component {
 			  }).then(response => response.json()).then(data => console.log(data))
 
 			this.setState({
-				//activePanel: 'home'
+				activePanel: 'questions'
 			});
-    }
+	}
+	
+	loadCsv(csv){
+		for(let i = 0; i < csv.data.length; i++){
+			this.addExp({
+				"position": csv.data[i][1],
+				"company": csv.data[i][2],
+				"description": csv.data[i][3],
+				"startMonth": csv.data[i][4],
+				"finishMonth": csv.data[i][5]
+			})
+		}
+		this.setState({
+			activePanel: 'primaryForm'
+		});
+	}
 
 	changeHandler(event) {
 		const name = event.target.name
@@ -266,7 +282,7 @@ class App extends React.Component {
 
 		return (
 			<View activePanel={this.state.activePanel} modal={modal}>
-				<Home id="home" go={this.go} />
+				<Home id="home" go={this.go} load={this.loadCsv}/>
 				<PrimaryForm id="primaryForm" go={this.go} modal={() => this.setActiveModal(MODAL_PAGE_FILTERS)} expArray={this.state.expArray} removeExp={this.removeExp} modifyExp={this.modifyExp} postIt={this.PostIt}/>
 				<Questions id="questions" go={this.go}/>
 				<Kiara id="kiara" go={this.go} />
