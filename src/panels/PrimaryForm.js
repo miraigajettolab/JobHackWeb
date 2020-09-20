@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {Panel, PanelHeader, PanelHeaderButton, platform, IOS, FormLayout, Input, Textarea, Button, Group, Header, CardGrid, Card, RichCell} from '@vkontakte/vkui';
+import {Panel, PanelHeader, PanelHeaderButton, platform, IOS, Button, Group, CardGrid, Card, RichCell} from '@vkontakte/vkui';
 import './PrimaryForm.css';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
@@ -14,7 +14,6 @@ function PrimaryForm(props){
 
     let noExp = props.expArray.length > 0 ? false : true;
 
-    console.log(props.expArray)
     return <Panel id={props.id}>
 		<PanelHeader
             separator={true}
@@ -28,8 +27,8 @@ function PrimaryForm(props){
         <Group>
         <CardGrid style={{marginBottom: noExp ? "190px" : "130px"}}>
         {
-        props.expArray.map((item) => (
-        <Card size="l">
+        props.expArray.map((item, i) => (
+        <Card size="l" key={i}>
             <RichCell
                 disabled
                 multiline

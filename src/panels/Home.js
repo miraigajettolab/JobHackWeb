@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Panel, PanelHeader, PanelHeaderButton, platform, IOS, Div, Banner, File} from '@vkontakte/vkui';
 import './Home.css';

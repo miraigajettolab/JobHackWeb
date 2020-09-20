@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import connect from '@vkontakte/vkui-connect';
 import './App.css';
-import { View, ModalRoot, ModalPage, ModalPageHeader, PanelHeaderButton, FormLayout, Textarea, Button, Input, platform,  ANDROID, IOS} from '@vkontakte/vkui';
+import { View, ModalRoot, ModalPage, ModalPageHeader, PanelHeaderButton, FormLayout, Textarea, Button, Input, platform,  ANDROID} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Home from './panels/Home';
@@ -137,13 +137,12 @@ class App extends React.Component {
 	}
 	
 	commitModifyExp = id => {
-		console.log("!!!!!!!!")
 		let expArray = [this.state.expArray.length]
 		let currentItem
 
 		for(let i = 0; i < this.state.expArray.length; i++){
 			currentItem = this.state.expArray[i];
-			if(currentItem.id == id){
+			if(currentItem.id === id){
 				expArray[i] = {
 					"id":id,
 					"position":this.state.position,

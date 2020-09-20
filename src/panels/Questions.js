@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {Panel, PanelHeader, PanelHeaderButton, platform, IOS, FormLayout, Input, Textarea, Button, Group, Header, CardGrid, Card, RichCell} from '@vkontakte/vkui';
+import {Panel, PanelHeader, PanelHeaderButton, platform, IOS, FormLayout, Input, Button, Group} from '@vkontakte/vkui';
 import './Questions.css';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
@@ -25,6 +25,7 @@ function Questions(props){
             top={item[0]}
             onChange = {props.changeHandler}
             name = {i}
+            key = {i}
             value = {item[1]} />))
         }
         <Button className="applyButton" size="xl" onClick={console.log}>Отправить</Button>
