@@ -12,6 +12,8 @@ const osname = platform();
 
 function PrimaryForm(props){
 
+    let noExp = props.expArray.length > 0 ? false : true;
+
     console.log(props.expArray)
     return <Panel id={props.id}>
 		<PanelHeader
@@ -24,7 +26,7 @@ function PrimaryForm(props){
 		</PanelHeader>
 
         <Group>
-        <CardGrid>
+        <CardGrid style={{marginBottom: noExp ? "190px" : "130px"}}>
         {
         props.expArray.map((item) => (
         <Card size="l">
@@ -43,11 +45,13 @@ function PrimaryForm(props){
         </Card>))
         }
         </CardGrid>
+        <div className="footerBlock" style={{height: noExp ? "190px" : "130px"}}>
         <Button className="modalButton" size="xl" onClick={props.modal}>Добавить</Button>
         <Button className="modalButton" size="xl" onClick={props.postIt}
             disabled={!(props.expArray.length > 0 )}>Отправить</Button>
         <Button className="modalButton" size="xl" onClick={props.go} data-to="questions" 
-            style={props.expArray.length > 0 ? {display: "none"}:{}} mode = "secondary">У меня нет опыта</Button>
+            style={noExp ? {}:{display: "none"}} mode = "secondary">У меня нет опыта</Button>
+        </div>
         </Group>
 
 	</Panel>

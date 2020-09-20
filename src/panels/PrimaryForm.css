@@ -29,3 +29,12 @@
     margin-top: 12px;
     margin-bottom: 12px;
 }
+
+.footerBlock {
+    position: fixed;
+    z-index: 2;
+    width:100%;
+    left: 0px;
+    bottom: 0px;
+    background:white;
+}

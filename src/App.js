@@ -26,7 +26,8 @@ class App extends React.Component {
 			description: "",
 			startMonth: "",
 			finishMonth: "",
-			modifyId: -1
+			modifyId: -1,
+			questions: {}
 		};
 
 		this.changeHandler = this.changeHandler.bind(this)
@@ -45,11 +46,12 @@ class App extends React.Component {
 				  'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({"data" : this.state.expArray})
-			  }).then(response => response.json()).then(data => console.log(data))
+			  }).then(response => response.json()).then(data => this.setState({"questions":data}))
 
 			this.setState({
 				activePanel: 'questions'
 			});
+			console.log(this.state.questions)
 	}
 	
 	loadCsv(csv){
