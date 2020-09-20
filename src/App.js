@@ -11,6 +11,7 @@ import Done from './panels/Done'
 
 const MODAL_PAGE_FILTERS = 'filters';
 const osname = platform();
+localStorage.setItem("id", "0")
 
 class App extends React.Component {
 	constructor(props) {
@@ -89,14 +90,16 @@ class App extends React.Component {
 
 	addExp = (obj) => {
 		let expArrayOld = this.state.expArray;
+		let parsedId = parseInt(localStorage.getItem("id"));
 		let expArray = 	[...expArrayOld, {
-            "id": expArrayOld.length, 
+            "id": parsedId, 
             "position": obj.position,
             "company": obj.company,
             "description": obj.description,
             "startMonth": obj.startMonth,
 			"finishMonth": obj.finishMonth
-        }]
+		}]
+		localStorage.setItem("id", parsedId+1)
 		
 		this.setState({
 			expArray

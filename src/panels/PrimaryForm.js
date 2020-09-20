@@ -13,7 +13,7 @@ const osname = platform();
 function PrimaryForm(props){
 
     let noExp = props.expArray.length > 0 ? false : true;
-
+    
     return <Panel id={props.id}>
 		<PanelHeader
             separator={true}

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Panel, PanelHeader, PanelHeaderButton, platform, Group, Cell, CardGrid, Card, IOS, Div, Banner} from '@vkontakte/vkui';
+import {Panel, PanelHeader, PanelHeaderButton, platform, Group, Cell, CardGrid, Card, IOS} from '@vkontakte/vkui';
 import './Done.css';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
@@ -15,7 +15,7 @@ function Done (props){
 				{osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
 			</PanelHeaderButton>}
 		>
-			Поиск вакансий
+			Спасибо
 		</PanelHeader>
         <Group separator="hide" className="TextGroup">
         <CardGrid>
