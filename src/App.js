@@ -41,8 +41,8 @@ class App extends React.Component {
 		  };
 	}
 
-	PostIt() {
-			  fetch('https://desolate-cliffs-57137.herokuapp.com/proceed_data', {
+	PostIt(ruchka) {
+			  fetch(ruchka, {
 				method: 'POST',
 				headers: {
 				  'Accept': 'application/json',

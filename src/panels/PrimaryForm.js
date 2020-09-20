@@ -57,9 +57,9 @@ function PrimaryForm(props){
         </CardGrid>
         <div className="footerBlock" style={{height: noExp ? "190px" : "130px"}}>
         <Button className="modalButton" size="xl" onClick={props.modal}>Добавить</Button>
-        <Button className="modalButton" size="xl" onClick={props.postIt}
+        <Button className="modalButton" size="xl" onClick={() => props.postIt("https://desolate-cliffs-57137.herokuapp.com/proceed_data")}
             disabled={!(props.expArray.length > 0 )}>Отправить</Button>
-        <Button className="modalButton" size="xl" onClick={props.go} data-to="questions" 
+        <Button className="modalButton" size="xl" onClick={() => props.postIt("https://desolate-cliffs-57137.herokuapp.com/no_experience")}
             style={noExp ? {}:{display: "none"}} mode = "secondary">У меня нет опыта</Button>
         </div>
         </Group>
